@@ -33,7 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 function OrderHistory(props) {
-  const { loading,orders } = useSelector(
+  const { loading, orders } = useSelector(
     (state) => state.orderMineList
   );
   const dispatch = useDispatch();
@@ -45,7 +45,7 @@ function OrderHistory(props) {
       <h1 className="text-3xl font-semibold mb-7 tracking-wider">Đơn Hàng Đã Đặt</h1>
       {loading ? (
         <Loading />
-      ) :(
+      ) : (
         <TableContainer className="rounded-none" component={Paper}>
           <Table sx={{ with: 700 }} aria-label="customized table">
             <TableHead>
@@ -63,7 +63,7 @@ function OrderHistory(props) {
             </TableHead>
             <TableBody>
               {orders &&
-                orders.map((item, index) => {
+                orders.filter(item => item.isPaid === true).map((item, index) => {
                   return (
                     <StyledTableRow key={index}>
                       <StyledTableCell align="center" className="bg-white">
